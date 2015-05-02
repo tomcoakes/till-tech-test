@@ -3,7 +3,7 @@ feature "As a barista at the coffee shop, I can take an order." do
   describe "When a customer orders 1 Caffe Latte," do    
     
     let(:till) { Till.new }
-    let(:caffe_latte) { Item.new("Caffe Latte", 475) }
+    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 475}) }
 
     before do
       till.add_to_order(caffe_latte)

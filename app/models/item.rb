@@ -2,9 +2,9 @@ class Item
 
   attr_reader :name, :price
 
-  def initialize(name, price)
-    @name = name
-    @price = price
+  def initialize(options)
+    @name = options[:name]
+    @price = options[:price]
   end
 
 end
