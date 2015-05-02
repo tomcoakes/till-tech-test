@@ -22,7 +22,7 @@ feature "As a barista at the coffee shop, I can take an order." do
     end
 
     scenario "the order total is 4.75" do
-      expect(till.total_price).to eq 475
+      expect(till.subtotal).to eq 475
     end
 
     describe "the till produces a receipt" do
@@ -46,7 +46,7 @@ feature "As a barista at the coffee shop, I can take an order." do
       end
 
       scenario "with the total price before tax" do
-        expect(receipt[:price_before_tax]).to eq 475
+        expect(receipt[:subtotal]).to eq 475
       end
 
     end
@@ -67,7 +67,7 @@ feature "As a barista at the coffee shop, I can take an order." do
     end
 
     scenario "the order total is 9.50" do
-      expect(till.total_price).to eq 950
+      expect(till.subtotal).to eq 950
     end
 
     describe "the till produces a receipt" do
@@ -98,7 +98,7 @@ feature "As a barista at the coffee shop, I can take an order." do
     end
 
     scenario "the order total is 9.50" do
-      expect(till.total_price).to eq 1355
+      expect(till.subtotal).to eq 1355
     end
 
     describe "the till produces a receipt" do
@@ -110,7 +110,7 @@ feature "As a barista at the coffee shop, I can take an order." do
       end
 
       scenario "with the total price before tax" do
-        expect(receipt[:price_before_tax]).to eq 1355
+        expect(receipt[:subtotal]).to eq 1355
       end
 
     end

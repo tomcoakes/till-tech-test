@@ -8,8 +8,8 @@ describe Till do
     expect(till).to respond_to(:add_to_order).with(1).argument
   end
 
-  it "responds to the method 'total_price'" do
-    expect(till).to respond_to(:total_price)
+  it "responds to the method 'subtotal'" do
+    expect(till).to respond_to(:subtotal)
   end
 
   it "responds to the method 'produce_receipt'" do
@@ -24,12 +24,12 @@ describe Till do
     expect(till.current_order).to eq []
   end
 
-  describe "total_price" do
+  describe "subtotal" do
     let(:caffe_latte) { double :caffe_latte, price: 475}
 
     it "sums the prices of all the items in the order" do
       till.add_to_order(caffe_latte)
-      expect(till.total_price).to eq 475
+      expect(till.subtotal).to eq 475
     end
   end
 
@@ -89,7 +89,7 @@ describe Till do
 
     it "returns the total price before tax" do
       till.add_to_order(caffe_latte)
-      expect(till.produce_receipt[:price_before_tax]).to eq 475
+      expect(till.produce_receipt[:subtotal]).to eq 475
     end
 
   end

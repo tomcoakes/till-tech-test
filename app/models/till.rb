@@ -10,7 +10,7 @@ class Till
     current_order << item
   end
 
-  def total_price
+  def subtotal
     current_order.inject(0) { |sum, item| sum += item.price }
   end
 
@@ -20,7 +20,7 @@ class Till
       address: "123 Lakeside Way",
       phone: "16503600708",
       items_ordered: generate_lines,
-      price_before_tax: total_price
+      subtotal: subtotal
     }
   end
 
