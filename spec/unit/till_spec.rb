@@ -20,6 +20,10 @@ describe Till do
     expect(till).to respond_to(:generate_lines)
   end
 
+  it "has a tax rate" do
+    expect(Till::TAX_RATE).not_to be_nil
+  end
+
   it "is created with an empty order list" do
     expect(till.current_order).to eq []
   end

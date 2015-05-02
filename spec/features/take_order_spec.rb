@@ -49,6 +49,10 @@ feature "As a barista at the coffee shop, I can take an order." do
         expect(receipt[:subtotal]).to eq 475
       end
 
+      scenario "with the amount of tax to be added" do
+        expect(receipt[:tax]).to eq 41
+      end
+
     end
 
   end

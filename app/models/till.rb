@@ -2,6 +2,8 @@ class Till
 
   attr_reader :current_order
 
+  TAX_RATE = 8.6
+
   def initialize
     @current_order = []
   end
@@ -20,7 +22,8 @@ class Till
       address: "123 Lakeside Way",
       phone: "16503600708",
       items_ordered: generate_lines,
-      subtotal: subtotal
+      subtotal: subtotal,
+      tax: ((subtotal / 100.0) * TAX_RATE).round
     }
   end
 
