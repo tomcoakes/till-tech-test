@@ -24,8 +24,8 @@ class Till
   end
 
   def generate_lines
-    current_order.map do |item|
-      {item: item, quantity: 1, line_price: item.price}
+    unique_items = current_order.uniq.map do |item|
+      {item: item, quantity: current_order.count(item), line_price: item.price}
     end
   end
 
