@@ -21,9 +21,8 @@ feature "As a barista at the coffee shop, I can take an order." do
       expect(till.current_order[0].price).to eq 475
     end
 
-    scenario "the receipt total is 4.75" do
-      receipt = till.generate_receipt
-      expect(receipt.total_price).to eq 475
+    scenario "the order total is 4.75" do
+      expect(till.total_price).to eq 475
     end
 
   end
@@ -31,18 +30,18 @@ feature "As a barista at the coffee shop, I can take an order." do
   describe "When a customer orders 2 Caffe Lattes," do
 
     let(:till) { Till.new }
+    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 475}) }
 
     before do
-      2.times { till.add_to_order(:caffe_latte) }
+      2.times { till.add_to_order(caffe_latte) }
     end
 
     scenario "the current order contains 2 items" do
       expect(till.current_order.count).to eq 2
     end
 
-    scenario "the receipt total is 9.50" do
-      receipt = till.generate_receipt
-      expect(receipt.total_price).to eq 950
+    scenario "the order total is 9.50" do
+      expect(till.total_price).to eq 950
     end
 
   end

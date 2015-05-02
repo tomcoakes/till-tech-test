@@ -10,8 +10,8 @@ class Till
     current_order << item
   end
 
-  def generate_receipt
-    Receipt.new
+  def total_price
+    current_order.inject(0) { |sum, item| sum += item.price }
   end
 
 end
