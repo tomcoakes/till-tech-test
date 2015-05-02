@@ -96,6 +96,25 @@ describe Till do
       expect(till.produce_receipt[:subtotal]).to eq 475
     end
 
+    it "returns the amount of tax to be added" do
+      till.add_to_order(caffe_latte)
+      expect(till.produce_receipt[:tax]).to eq 41
+    end
+
+    it "returns the total price after tax" do
+      till.add_to_order(caffe_latte)
+      expect(till.produce_receipt[:total]).to eq 516
+    end
+
+  end
+
+  describe "calculate_added_tax_on helper method" do
+
+    it "returns 10 for 100 when the tax rate is set at 10%" do
+      TAX_RATE = 10
+      expect(till.calculate_added_tax_on(100, TAX_RATE)).to eq 10
+    end
+
   end
 
 end

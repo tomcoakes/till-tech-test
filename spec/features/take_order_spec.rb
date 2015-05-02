@@ -53,6 +53,10 @@ feature "As a barista at the coffee shop, I can take an order." do
         expect(receipt[:tax]).to eq 41
       end
 
+      scenario "with the total price after tax" do
+        expect(receipt[:total]).to eq 516
+      end
+
     end
 
   end
