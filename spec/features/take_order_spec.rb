@@ -3,13 +3,21 @@ feature "As a barista at the coffee shop, I can take an order." do
   describe "When a customer orders 1 Caffe Latte," do    
     
     let(:till) { Till.new }
+    let(:caffe_latte) { Item.new("Caffe Latte") }
 
     before do
-      till.add_to_order(:caffe_latte)
+      till.add_to_order(caffe_latte)
     end
    
     scenario "the current order contains 1 item" do
       expect(till.current_order.count).to eq 1
+    end
+
+    scenario "the item is a Caffe Latte" do
+      expect(till.current_order[0].name).to eq "Caffe Latte"
+    end
+
+    xscenario "the item costs 4.75" do
     end
 
     scenario "the receipt total is 4.75" do
