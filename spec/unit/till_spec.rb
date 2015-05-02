@@ -45,6 +45,11 @@ describe Till do
     it "includes the address of the shop" do
       expect(till.produce_receipt[:address]).not_to be_nil
     end
+
+    it "includes the phone number of the shop" do
+      expect(till.produce_receipt[:phone]).not_to be_nil
+    end
+
   end
 
 end

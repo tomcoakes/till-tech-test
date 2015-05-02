@@ -37,6 +37,10 @@ feature "As a barista at the coffee shop, I can take an order." do
         expect(receipt[:address]).to eq "123 Lakeside Way"
       end
 
+      scenario "with the phone number of the coffee shop" do
+        expect(receipt[:phone]).to eq "16503600708"
+      end
+
     end
 
   end
