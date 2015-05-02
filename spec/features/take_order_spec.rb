@@ -25,6 +25,15 @@ feature "As a barista at the coffee shop, I can take an order." do
       expect(till.total_price).to eq 475
     end
 
+    describe "the till produces a receipt" do
+
+      scenario "with the name of the coffee shop" do
+        receipt = till.produce_receipt
+        expect(receipt[:shop_name]).to eq "The Coffee Connection"
+      end
+
+    end
+
   end
 
   describe "When a customer orders 2 Caffe Lattes," do

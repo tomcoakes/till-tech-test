@@ -14,4 +14,8 @@ class Till
     current_order.inject(0) { |sum, item| sum += item.price }
   end
 
+  def produce_receipt
+    {shop_name: "The Coffee Connection"}
+  end
+
 end

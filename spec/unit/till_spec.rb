@@ -12,6 +12,10 @@ describe Till do
     expect(till).to respond_to(:total_price)
   end
 
+  it "responds to the method 'produce_receipt'" do
+    expect(till).to respond_to(:produce_receipt)
+  end
+
   it "is created with an empty order list" do
     expect(till.current_order).to eq []
   end
