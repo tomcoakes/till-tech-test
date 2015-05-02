@@ -45,6 +45,10 @@ feature "As a barista at the coffee shop, I can take an order." do
         expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 1, line_price: 475}])
       end
 
+      scenario "with the total price before tax" do
+        expect(receipt[:price_before_tax]).to eq 475
+      end
+
     end
 
   end
@@ -72,6 +76,41 @@ feature "As a barista at the coffee shop, I can take an order." do
 
       scenario "with a list of the items ordered" do
         expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 2, line_price: 950}])
+      end
+
+    end
+
+  end
+
+  describe "When a customer orders 2 Caffe Lattes and 1 Blueberry Muffin" do
+
+    let(:till) { Till.new }
+    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 475}) }
+    let(:blueberry_muffin) { Item.new( {name: "Blueberry Muffin", price: 405}) }
+
+    before do
+      2.times { till.add_to_order(caffe_latte) }
+      till.add_to_order(blueberry_muffin)
+    end
+
+    scenario "the current order contains 2 items" do
+      expect(till.current_order.count).to eq 3
+    end
+
+    scenario "the order total is 9.50" do
+      expect(till.total_price).to eq 1355
+    end
+
+    describe "the till produces a receipt" do
+
+      let(:receipt) { till.produce_receipt }
+
+      scenario "with a list of the items ordered" do
+        expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 2, line_price: 950}, {item: blueberry_muffin, quantity: 1, line_price: 405}])
+      end
+
+      scenario "with the total price before tax" do
+        expect(receipt[:price_before_tax]).to eq 1355
       end
 
     end

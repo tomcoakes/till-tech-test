@@ -87,6 +87,11 @@ describe Till do
       expect(till.produce_receipt[:items_ordered].first[:item]).to eq(caffe_latte)
     end
 
+    it "returns the total price before tax" do
+      till.add_to_order(caffe_latte)
+      expect(till.produce_receipt[:price_before_tax]).to eq 475
+    end
+
   end
 
 end

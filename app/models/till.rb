@@ -19,13 +19,14 @@ class Till
       shop_name: "The Coffee Connection",
       address: "123 Lakeside Way",
       phone: "16503600708",
-      items_ordered: generate_lines
+      items_ordered: generate_lines,
+      price_before_tax: total_price
     }
   end
 
   def generate_lines
     unique_items = current_order.uniq.map do |item|
-      {item: item, quantity: current_order.count(item), line_price: item.price}
+      {item: item, quantity: current_order.count(item), line_price: item.price * current_order.count(item)}
     end
   end
 
