@@ -57,6 +57,13 @@ describe Till do
       till.add_to_order(caffe_latte)
       expect(till.generate_lines.first[:line_price]).to eq 475
     end
+
+    it "returns the quantity 2 when an item is ordered twice" do
+      till.add_to_order(caffe_latte)
+      till.add_to_order(caffe_latte)
+      expect(till.generate_lines.first[:quantity]).to eq 2
+    end
+
   end
 
   describe "produce_receipt" do

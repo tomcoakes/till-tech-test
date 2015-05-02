@@ -24,11 +24,9 @@ class Till
   end
 
   def generate_lines
-    lines = []
-    current_order.each do |item|
-      lines << {item: item, quantity: 1, line_price: item.price}
+    current_order.map do |item|
+      {item: item, quantity: 1, line_price: item.price}
     end
-    return lines
   end
 
 end

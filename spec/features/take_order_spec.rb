@@ -66,6 +66,16 @@ feature "As a barista at the coffee shop, I can take an order." do
       expect(till.total_price).to eq 950
     end
 
+    describe "the till produces a receipt" do
+
+      let(:receipt) { till.produce_receipt }
+
+      scenario "with a list of the items ordered" do
+        expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 2, line_price: 950}])
+      end
+
+    end
+
   end
 
 end
