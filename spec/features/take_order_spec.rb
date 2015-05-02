@@ -41,6 +41,10 @@ feature "As a barista at the coffee shop, I can take an order." do
         expect(receipt[:phone]).to eq "16503600708"
       end
 
+      scenario "with a list of the items ordered" do
+        expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 1, line_price: 475}])
+      end
+
     end
 
   end

@@ -18,8 +18,17 @@ class Till
     {
       shop_name: "The Coffee Connection",
       address: "123 Lakeside Way",
-      phone: "16503600708"
+      phone: "16503600708",
+      items_ordered: generate_lines
     }
+  end
+
+  def generate_lines
+    lines = []
+    current_order.each do |item|
+      lines << {item: item, quantity: 1, line_price: item.price}
+    end
+    return lines
   end
 
 end
