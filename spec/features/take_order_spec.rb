@@ -27,9 +27,14 @@ feature "As a barista at the coffee shop, I can take an order." do
 
     describe "the till produces a receipt" do
 
+      let(:receipt) { till.produce_receipt }
+
       scenario "with the name of the coffee shop" do
-        receipt = till.produce_receipt
         expect(receipt[:shop_name]).to eq "The Coffee Connection"
+      end
+
+      scenario "with the address of the coffee shop" do
+        expect(receipt[:address]).to eq "123 Lakeside Way"
       end
 
     end

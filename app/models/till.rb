@@ -15,7 +15,10 @@ class Till
   end
 
   def produce_receipt
-    {shop_name: "The Coffee Connection"}
+    {
+      shop_name: "The Coffee Connection",
+      address: "123 Lakeside Way"
+    }
   end
 
 end

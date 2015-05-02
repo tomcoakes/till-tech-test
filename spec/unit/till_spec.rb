@@ -37,4 +37,14 @@ describe Till do
     end
   end
 
+  describe "produce_receipt" do
+    it "includes the name of the shop" do
+      expect(till.produce_receipt[:shop_name]).not_to be_nil
+    end
+
+    it "includes the address of the shop" do
+      expect(till.produce_receipt[:address]).not_to be_nil
+    end
+  end
+
 end
