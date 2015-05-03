@@ -23,9 +23,9 @@ class Till
 
   def produce_receipt
     {
-      shop_name: "",
-      address: "",
-      phone: "",
+      shop_name: configuration[0]["shopName"],
+      address: configuration[0]["address"],
+      phone: configuration[0]["phone"],
       items_ordered: generate_lines,
       subtotal: subtotal,
       tax: calculate_added_tax_on(subtotal, TAX_RATE),
