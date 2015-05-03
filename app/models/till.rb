@@ -40,7 +40,7 @@ class Till
   end
 
   def calculate_added_tax_on(amount, tax_rate)
-    ((amount / 100.0) * tax_rate).round
+    ((amount / 100.0) * tax_rate).round(2)
   end
 
 end

@@ -3,7 +3,7 @@ feature "As a barista at the coffee shop, I can take an order." do
   describe "When a customer orders 1 Caffe Latte," do    
     
     let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
-    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 475}) }
+    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 4.75}) }
 
     before do
       till.add_to_order(caffe_latte)
@@ -18,11 +18,11 @@ feature "As a barista at the coffee shop, I can take an order." do
     end
 
     scenario "the item costs 4.75" do
-      expect(till.current_order[0].price).to eq 475
+      expect(till.current_order[0].price).to eq 4.75
     end
 
     scenario "the order total is 4.75" do
-      expect(till.subtotal).to eq 475
+      expect(till.subtotal).to eq 4.75
     end
 
     describe "the till produces a receipt" do
@@ -42,19 +42,19 @@ feature "As a barista at the coffee shop, I can take an order." do
       end
 
       scenario "with a list of the items ordered" do
-        expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 1, line_price: 475}])
+        expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 1, line_price: 4.75}])
       end
 
       scenario "with the total price before tax" do
-        expect(receipt[:subtotal]).to eq 475
+        expect(receipt[:subtotal]).to eq 4.75
       end
 
       scenario "with the amount of tax to be added" do
-        expect(receipt[:tax]).to eq 41
+        expect(receipt[:tax]).to eq 0.41
       end
 
       scenario "with the total price after tax" do
-        expect(receipt[:total]).to eq 516
+        expect(receipt[:total]).to eq 5.16
       end
 
     end
@@ -64,7 +64,7 @@ feature "As a barista at the coffee shop, I can take an order." do
   describe "When a customer orders 2 Caffe Lattes," do
 
     let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
-    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 475}) }
+    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 4.75}) }
 
     before do
       2.times { till.add_to_order(caffe_latte) }
@@ -75,7 +75,7 @@ feature "As a barista at the coffee shop, I can take an order." do
     end
 
     scenario "the order total is 9.50" do
-      expect(till.subtotal).to eq 950
+      expect(till.subtotal).to eq 9.50
     end
 
     describe "the till produces a receipt" do
@@ -83,7 +83,7 @@ feature "As a barista at the coffee shop, I can take an order." do
       let(:receipt) { till.produce_receipt }
 
       scenario "with a list of the items ordered" do
-        expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 2, line_price: 950}])
+        expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 2, line_price: 9.50}])
       end
 
     end
@@ -93,8 +93,8 @@ feature "As a barista at the coffee shop, I can take an order." do
   describe "When a customer orders 2 Caffe Lattes and 1 Blueberry Muffin" do
 
     let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
-    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 475}) }
-    let(:blueberry_muffin) { Item.new( {name: "Blueberry Muffin", price: 405}) }
+    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 4.75}) }
+    let(:blueberry_muffin) { Item.new( {name: "Blueberry Muffin", price: 4.05}) }
 
     before do
       2.times { till.add_to_order(caffe_latte) }
@@ -106,7 +106,7 @@ feature "As a barista at the coffee shop, I can take an order." do
     end
 
     scenario "the order total is 9.50" do
-      expect(till.subtotal).to eq 1355
+      expect(till.subtotal).to eq 13.55
     end
 
     describe "the till produces a receipt" do
@@ -114,11 +114,11 @@ feature "As a barista at the coffee shop, I can take an order." do
       let(:receipt) { till.produce_receipt }
 
       scenario "with a list of the items ordered" do
-        expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 2, line_price: 950}, {item: blueberry_muffin, quantity: 1, line_price: 405}])
+        expect(receipt[:items_ordered]).to eq([{item: caffe_latte, quantity: 2, line_price: 9.50}, {item: blueberry_muffin, quantity: 1, line_price: 4.05}])
       end
 
       scenario "with the total price before tax" do
-        expect(receipt[:subtotal]).to eq 1355
+        expect(receipt[:subtotal]).to eq 13.55
       end
 
     end

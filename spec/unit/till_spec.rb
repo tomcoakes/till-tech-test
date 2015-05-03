@@ -37,11 +37,11 @@ describe Till do
   end
 
   describe "subtotal" do
-    let(:caffe_latte) { double :caffe_latte, price: 475}
+    let(:caffe_latte) { double :caffe_latte, price: 4.75}
 
     it "sums the prices of all the items in the order" do
       till.add_to_order(caffe_latte)
-      expect(till.subtotal).to eq 475
+      expect(till.subtotal).to eq 4.75
     end
   end
 
@@ -53,7 +53,7 @@ describe Till do
   end
 
   describe "generate_lines" do
-    let(:caffe_latte) { double :caffe_latte, price: 475}
+    let(:caffe_latte) { double :caffe_latte, price: 4.75}
     
     it "returns the item object" do
       till.add_to_order(caffe_latte)
@@ -67,7 +67,7 @@ describe Till do
 
     it "returns the line's price" do
       till.add_to_order(caffe_latte)
-      expect(till.generate_lines.first[:line_price]).to eq 475
+      expect(till.generate_lines.first[:line_price]).to eq 4.75
     end
 
     it "returns the quantity 2 when an item is ordered twice" do
@@ -80,7 +80,7 @@ describe Till do
 
   describe "produce_receipt" do
 
-    let(:caffe_latte) { double :caffe_latte, price: 475}
+    let(:caffe_latte) { double :caffe_latte, price: 4.75}
 
     before do
       till.load_from("./app/shop_configurations/hipstercoffee.json")
@@ -105,17 +105,17 @@ describe Till do
 
     it "returns the total price before tax" do
       till.add_to_order(caffe_latte)
-      expect(till.produce_receipt[:subtotal]).to eq 475
+      expect(till.produce_receipt[:subtotal]).to eq 4.75
     end
 
     it "returns the amount of tax to be added" do
       till.add_to_order(caffe_latte)
-      expect(till.produce_receipt[:tax]).to eq 41
+      expect(till.produce_receipt[:tax]).to eq 0.41
     end
 
     it "returns the total price after tax" do
       till.add_to_order(caffe_latte)
-      expect(till.produce_receipt[:total]).to eq 516
+      expect(till.produce_receipt[:total]).to eq 5.16
     end
 
   end
