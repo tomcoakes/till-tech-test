@@ -40,7 +40,7 @@ describe Till do
     expect(till.current_order).to eq []
   end
 
-  describe "subtotal" do
+  describe "#subtotal" do
     let(:caffe_latte) { double :caffe_latte, price: 4.75}
 
     it "sums the prices of all the items in the order" do
