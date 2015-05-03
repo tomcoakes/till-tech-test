@@ -36,7 +36,11 @@ class Till
   end
 
   def receive_payment(amount_paid)
-    amount_paid - receipt[:total]
+    if (amount_paid - receipt[:total]) < 0
+      raise "The total price is more than the customer has paid"
+    else 
+      (amount_paid - receipt[:total])
+    end
   end
 
 

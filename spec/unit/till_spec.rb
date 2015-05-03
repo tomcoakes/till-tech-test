@@ -137,16 +137,21 @@ describe Till do
 
       let(:caffe_latte) { double :caffe_latte, price: 4.75}
 
-      it "returns 0 change when amount paid is equal to the price" do
+      before do
         till.add_to_order(caffe_latte)
-        receipt = till.produce_receipt
+        till.produce_receipt        
+      end
+
+      it "returns 0 change when amount paid is equal to the price" do
         expect(till.receive_payment(5.16)).to eq 0
       end
 
       it "returns 0.25 change when amount paid is 0.25 more than the price" do
-        till.add_to_order(caffe_latte)
-        receipt = till.produce_receipt
         expect(till.receive_payment(5.41)).to eq 0.25
+      end
+
+      it "throws an error when the payment is less than the price" do
+        expect{ till.receive_payment(5.15) }.to raise_error "The total price is more than the customer has paid"
       end
 
     end
