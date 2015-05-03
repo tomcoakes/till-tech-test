@@ -1,4 +1,8 @@
+require_relative 'menu'
+
 class Till
+
+  include Menu
 
   attr_reader :current_order
 

@@ -46,4 +46,5 @@ PLATFORMS
 DEPENDENCIES
   capybara
   codeclimate-test-reporter
+  json
   rspec

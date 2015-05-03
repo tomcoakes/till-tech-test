@@ -20,6 +20,10 @@ describe Till do
     expect(till).to respond_to(:generate_lines)
   end
 
+  it "responds to the method 'load_form'" do
+    expect(till).to respond_to(:load_from).with(1).argument
+  end
+
   it "has a tax rate" do
     expect(Till::TAX_RATE).not_to be_nil
   end
