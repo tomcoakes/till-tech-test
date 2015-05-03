@@ -32,6 +32,10 @@ describe Till do
     expect(Till::TAX_RATE).not_to be_nil
   end
 
+  it "has a discount rate for big spenders" do
+    expect(Till::BIG_SPENDER_DISCOUNT_RATE).not_to be_nil
+  end
+
   it "is created with an empty order list" do
     expect(till.current_order).to eq []
   end
@@ -45,14 +49,14 @@ describe Till do
     end
   end
 
-  describe "add_to_order" do
+  describe "#add_to_order" do
     it "adds the item to the current order list" do
       till.add_to_order(:caffe_latte)
       expect(till.current_order).to include(:caffe_latte)
     end
   end
 
-  describe "generate_lines" do
+  describe "#generate_lines" do
     let(:caffe_latte) { double :caffe_latte, price: 4.75}
     
     it "returns the item object" do
@@ -78,7 +82,7 @@ describe Till do
 
   end
 
-  describe "produce_receipt" do
+  describe "#produce_receipt" do
 
     let(:caffe_latte) { double :caffe_latte, price: 4.75}
 
@@ -103,6 +107,11 @@ describe Till do
       expect(till.produce_receipt[:items_ordered].first[:item]).to eq(caffe_latte)
     end
 
+    it "returns the amount of discount added to the subtotal" do
+      till.add_to_order(caffe_latte)
+      expect(till.produce_receipt[:discount]).to eq 0
+    end
+
     it "returns the total price before tax" do
       till.add_to_order(caffe_latte)
       expect(till.produce_receipt[:subtotal]).to eq 4.75
@@ -120,11 +129,24 @@ describe Till do
 
   end
 
-  describe "calculate_added_tax_on helper method" do
+  describe "#calculate_added_tax_on helper method" do
 
     it "returns 10 for 100 when the tax rate is set at 10%" do
       TAX_RATE = 10
       expect(till.calculate_added_tax_on(100, TAX_RATE)).to eq 10
+    end
+
+  end
+
+  describe "#calculate_discount helper method" do
+
+    it "returns 5 for 100 when the price discount rate is set at 5%" do
+      BIG_SPENDER_DISCOUNT_RATE = 5
+      expect(till.calculate_discount(100, BIG_SPENDER_DISCOUNT_RATE)).to eq 5
+    end
+
+    it "returns 0 for 40 when the price discount rate is set at 5%" do
+      expect(till.calculate_discount(40, BIG_SPENDER_DISCOUNT_RATE)).to eq 0
     end
 
   end

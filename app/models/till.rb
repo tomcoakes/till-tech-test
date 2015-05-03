@@ -7,6 +7,7 @@ class Till
   attr_reader :current_order, :configuration
 
   TAX_RATE = 8.6
+  BIG_SPENDER_DISCOUNT_RATE = 5
 
   def initialize(till_configuration_file)
     @current_order = []
@@ -27,7 +28,8 @@ class Till
       address: configuration[0]["address"],
       phone: configuration[0]["phone"],
       items_ordered: generate_lines,
-      subtotal: subtotal,
+      discount: calculate_discount(subtotal, BIG_SPENDER_DISCOUNT_RATE),
+      subtotal: subtotal - calculate_discount(subtotal, BIG_SPENDER_DISCOUNT_RATE),
       tax: calculate_added_tax_on(subtotal, TAX_RATE),
       total: subtotal + calculate_added_tax_on(subtotal, TAX_RATE)
     }
@@ -41,6 +43,10 @@ class Till
 
   def calculate_added_tax_on(amount, tax_rate)
     ((amount / 100.0) * tax_rate).round(2)
+  end
+
+  def calculate_discount(amount, discount_rate)
+    amount >= 50.0 ? ((amount / 100.0) * discount_rate).round(2) : 0
   end
 
 end

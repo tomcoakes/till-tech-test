@@ -1,4 +1,4 @@
-feature "As a barista at the coffee shop, I can take an order." do
+feature "As a barista at the coffee shop, I can take a customer's order." do
 
   describe "When a customer orders 1 Caffe Latte," do    
     
@@ -58,8 +58,8 @@ feature "As a barista at the coffee shop, I can take an order." do
       end
 
     end
-
   end
+
 
   describe "When a customer orders 2 Caffe Lattes," do
 
@@ -87,10 +87,10 @@ feature "As a barista at the coffee shop, I can take an order." do
       end
 
     end
-
   end
 
-  describe "When a customer orders 2 Caffe Lattes and 1 Blueberry Muffin" do
+
+  describe "When a customer orders 2 Caffe Lattes and 1 Blueberry Muffin," do
 
     let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
     let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 4.75}) }
@@ -122,7 +122,26 @@ feature "As a barista at the coffee shop, I can take an order." do
       end
 
     end
-
   end
 
+
+  describe "When a customer's order (pre-tax) totals £50 or more," do
+
+    let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
+    let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 4.75}) }
+    let(:receipt) { till.produce_receipt }
+
+    before do
+      11.times { till.add_to_order(caffe_latte) }
+    end
+
+    scenario "a discount of 5% will be displayed on the receipt" do
+      expect(receipt[:discount]).to eq 2.61
+    end
+
+    scenario "the subtotal will be reduced by the discount price" do
+      expect(receipt[:subtotal]).to eq 49.64
+    end
+
+  end
 end
