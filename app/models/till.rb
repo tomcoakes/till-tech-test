@@ -4,12 +4,13 @@ class Till
 
   include Menu
 
-  attr_reader :current_order
+  attr_reader :current_order, :configuration
 
   TAX_RATE = 8.6
 
-  def initialize
+  def initialize(till_configuration_file)
     @current_order = []
+    @configuration = self.load_from(till_configuration_file)
   end
 
   def add_to_order(item)
@@ -22,9 +23,9 @@ class Till
 
   def produce_receipt
     {
-      shop_name: "The Coffee Connection",
-      address: "123 Lakeside Way",
-      phone: "16503600708",
+      shop_name: "",
+      address: "",
+      phone: "",
       items_ordered: generate_lines,
       subtotal: subtotal,
       tax: calculate_added_tax_on(subtotal, TAX_RATE),

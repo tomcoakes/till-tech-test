@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe Till do
 
-  let(:till) { Till.new }
+  let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
+
+  it "is initialized with a till_configuration" do
+    expect(till.configuration).not_to be_nil
+  end
 
   it "responds to the method 'add_to_order'" do
     expect(till).to respond_to(:add_to_order).with(1).argument
@@ -20,7 +24,7 @@ describe Till do
     expect(till).to respond_to(:generate_lines)
   end
 
-  it "responds to the method 'load_form'" do
+  it "responds to the method 'load_from'" do
     expect(till).to respond_to(:load_from).with(1).argument
   end
 
@@ -78,16 +82,20 @@ describe Till do
 
     let(:caffe_latte) { double :caffe_latte, price: 475}
 
+    before do
+      till.load_from("./app/shop_configurations/hipstercoffee.json")
+    end
+
     it "returns the name of the shop" do
-      expect(till.produce_receipt[:shop_name]).not_to be_nil
+      expect(till.produce_receipt[:shop_name]).to eq "The Coffee Connection"
     end
 
     it "returns the address of the shop" do
-      expect(till.produce_receipt[:address]).not_to be_nil
+      expect(till.produce_receipt[:address]).to eq "123 Lakeside Way"
     end
 
     it "returns the phone number of the shop" do
-      expect(till.produce_receipt[:phone]).not_to be_nil
+      expect(till.produce_receipt[:phone]).to eq "16503600708"
     end
 
     it "returns a list of the items ordered" do

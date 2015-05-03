@@ -2,7 +2,7 @@ feature "As a barista at the coffee shop, I can take an order." do
 
   describe "When a customer orders 1 Caffe Latte," do    
     
-    let(:till) { Till.new }
+    let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
     let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 475}) }
 
     before do
@@ -63,7 +63,7 @@ feature "As a barista at the coffee shop, I can take an order." do
 
   describe "When a customer orders 2 Caffe Lattes," do
 
-    let(:till) { Till.new }
+    let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
     let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 475}) }
 
     before do
@@ -92,7 +92,7 @@ feature "As a barista at the coffee shop, I can take an order." do
 
   describe "When a customer orders 2 Caffe Lattes and 1 Blueberry Muffin" do
 
-    let(:till) { Till.new }
+    let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
     let(:caffe_latte) { Item.new( {name: "Caffe Latte", price: 475}) }
     let(:blueberry_muffin) { Item.new( {name: "Blueberry Muffin", price: 405}) }
 
