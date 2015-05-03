@@ -4,7 +4,7 @@ class Till
 
   include Menu
 
-  attr_reader :current_order, :configuration
+  attr_reader :current_order, :configuration, :receipt
 
   TAX_RATE = 8.6
   BIG_SPENDER_DISCOUNT_RATE = 5
@@ -23,7 +23,7 @@ class Till
   end
 
   def produce_receipt
-    {
+    @receipt = {
       shop_name: configuration[0]["shopName"],
       address: configuration[0]["address"],
       phone: configuration[0]["phone"],
@@ -34,6 +34,11 @@ class Till
       total: subtotal + calculate_added_tax_on(subtotal, TAX_RATE)
     }
   end
+
+  def receive_payment(amount_paid)
+    amount_paid - receipt[:total]
+  end
+
 
   def generate_lines
     unique_items = current_order.uniq.map do |item|
