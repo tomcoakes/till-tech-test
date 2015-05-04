@@ -44,6 +44,8 @@ class Till
   end
 
 
+  private
+
   def generate_lines
     unique_items = current_order.uniq.map do |item|
       {item: item, quantity: current_order.count(item), line_price: item.price * current_order.count(item)}

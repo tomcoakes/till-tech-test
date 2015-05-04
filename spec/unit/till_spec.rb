@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe Till do
 
+  before(:all) do
+    Till.send(:public, *Till.private_instance_methods)
+  end
+
   let(:till) { Till.new("./app/shop_configurations/hipstercoffee.json") }
 
   it "is initialized with a till_configuration" do
